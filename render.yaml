@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ecoville-piracicaba
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npx prisma generate && npx prisma db push && npx tsx prisma/seed.ts && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        value: file:./dev.db
+      - key: JWT_SECRET
+        value: ecoville-producao-jwt-seguro-2024
+      - key: NODE_ENV
+        value: production
